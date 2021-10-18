@@ -3,13 +3,13 @@ import {SafeAreaView, StyleSheet} from 'react-native';
 import {WebView} from 'react-native-webview';
 
 const NativeToWeb = (props) => {
+  // ------------- consent configuration received from the user ----------
   const consentConfig = {
     ContentSquare: true,
     Eulerian: true,
     GMP_FL: true,
     google_analytics: false,
-  };
-
+  }; // ------------- data to send to the web view ----------
   const data = `const consentConfig = {
     ContentSquare: ${consentConfig.ContentSquare},
     Eulerian: ${consentConfig.Eulerian},
@@ -18,28 +18,32 @@ const NativeToWeb = (props) => {
 
   return (
     <>
+          {' '}
       <SafeAreaView style={styles.flexContainer}>
+              {' '}
         <WebView
           source={{
-            html: `<body style="display:flex;justify-content:center;flex-direction:column;align-items:center">
-                      <h2>React native webview</h2>
-                      <button style="color:red; height:100;width:300; font-size:30px"
-                        onclick="showConsent()">show consent params</button>
-                      <p id="demo"></p>
-                      <script>
-                      function showConsent() {
-                        if (consentConfig) {
-                          window.alert('consentConfig.ContentSquare : '+ consentConfig.ContentSquare)
-                        }else{
-                           window.alert('no consentConfig setted');
-                        }
-                      }
-                    </script>
-           </body>`,
+            html: `<body style="display:flex;justify-content:center;flex-      direction:column;align-items:center">
+                     <h2>React native webview</h2>
+                     <button style="color:red; height:100;width:300; font- size:30px"
+                       onclick="showConsent()">show consent params</button>
+                     <p id="demo"></p>
+                     <script>
+                     function showConsent() {
+                       if (consentConfig) {
+                         window.alert('consentConfig.ContentSquare : '+ consentConfig.ContentSquare)
+                       }else{
+                           window.alert('no consentConfig setted');
+                       }
+                   }
+                   </script>
+           </body>`,
           }}
           injectedJavaScriptBeforeContentLoaded={data}
         />
+            {' '}
       </SafeAreaView>
+        {' '}
     </>
   );
 };
